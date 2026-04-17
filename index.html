@@ -72,8 +72,11 @@ nav{
   padding:.45rem 1.1rem;transition:all .2s;
 }
 .nav-cta:hover{background:var(--accent);color:var(--bg);}
-.menu-btn{display:none;flex-direction:column;gap:4px;cursor:pointer;}
-.menu-btn span{width:20px;height:1.5px;background:var(--fg);transition:.3s;}
+.menu-btn{display:none;flex-direction:column;gap:4px;cursor:pointer;padding:4px;}
+.menu-btn span{width:20px;height:1.5px;background:var(--fg);transition:all .3s ease;transform-origin:center;}
+.menu-btn.open span:nth-child(1){transform:translateY(5.5px) rotate(45deg);}
+.menu-btn.open span:nth-child(2){opacity:0;transform:scaleX(0);}
+.menu-btn.open span:nth-child(3){transform:translateY(-5.5px) rotate(-45deg);}
 .mobile-nav{display:none;position:fixed;top:64px;left:0;right:0;background:var(--bg2);border-bottom:1px solid var(--border);padding:1.5rem 2rem;z-index:299;flex-direction:column;gap:1.2rem;}
 .mobile-nav.open{display:flex;}
 
@@ -367,6 +370,27 @@ footer p{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);lett
   .frow{grid-template-columns:1fr;}
   .proj-inner{grid-template-columns:1fr;}
   footer{flex-direction:column;gap:.5rem;text-align:center;padding:1.2rem 1.5rem;}
+  .skills-grid{grid-template-columns:1fr;}
+  .kpi-row{grid-template-columns:repeat(3,1fr);}
+  .stat-grid{grid-template-columns:1fr 1fr;width:100%;}
+  .photo-orbit{width:260px;height:260px;}
+  .photo-center{width:190px;height:190px;}
+  .hero-name{font-size:clamp(2.4rem,10vw,3.5rem);}
+  .proof-zone{flex-wrap:wrap;}
+}
+@media(max-width:480px){
+  .sw{padding:3rem 1rem;}
+  nav{padding:.7rem 1rem;}
+  .hero-name{font-size:clamp(2rem,11vw,3rem);}
+  .photo-orbit{width:220px;height:220px;}
+  .photo-center{width:160px;height:160px;}
+  .stat-grid{grid-template-columns:1fr 1fr;}
+  .contact-wrap{padding:1.5rem;}
+  .vmodal-box{border-radius:12px;}
+  .sec-title{font-size:clamp(1.6rem,7vw,2.2rem);}
+  .filter-row{gap:.35rem;}
+  .fbtn{font-size:.68rem;padding:.3rem .7rem;}
+  .proof-btn{font-size:.62rem;padding:.28rem .65rem;}
 }
 
 /* ── LIGHT THEME VIBRANCY BOOST ── */
@@ -582,7 +606,7 @@ footer p{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);lett
 <nav id="navbar">
   <div class="nav-logo">R.D.R</div>
   <ul class="nav-links">
-    <li><a href="#about">Profil</a></li>
+    <li><a href="#about">À propos</a></li>
     <li><a href="#skills">Compétences</a></li>
     <li><a href="#projects">Projets</a></li>
     <li><a href="#cv">CV</a></li>
@@ -599,7 +623,7 @@ footer p{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);lett
   </div>
 </nav>
 <div class="mobile-nav" id="mobileNav">
-  <a href="#about" onclick="toggleMenu()">Profil</a>
+  <a href="#about" onclick="toggleMenu()">À propos</a>
   <a href="#skills" onclick="toggleMenu()">Compétences</a>
   <a href="#projects" onclick="toggleMenu()">Projets</a>
   <a href="#cv" onclick="toggleMenu()">CV</a>
@@ -669,7 +693,7 @@ footer p{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);lett
 <div class="sw">
   <div class="about-grid fade-in">
     <div>
-      <span class="eyebrow">01 / Profil</span>
+      <span class="eyebrow">01 / À propos</span>
       <div class="big-q">Données,<br><em>intelligence</em><br>et <span>impact.</span></div>
       <p class="about-text">Passionné par les avancées technologiques — notamment l'IA et tout ce qui touche à l'automatisation intelligente — je me spécialise dans la Data Science et le Machine Learning. J'aime comprendre les données en profondeur, construire des modèles qui apprennent, et visualiser ce qui n'est pas immédiatement visible.</p>
       <p class="about-text">Mon parcours entre Madagascar, le Maroc et la France m'a forgé une adaptabilité rare, une curiosité permanente et une aisance naturelle avec plusieurs langues — je parle couramment français, anglais et malgache. Que ce soit aux échecs, dans les jeux vidéo ou dans l'apprentissage d'une nouvelle technologie, j'applique la même rigueur et la même envie de progresser vite.</p>
@@ -697,7 +721,7 @@ footer p{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);lett
   <div class="fade-in">
     <span class="eyebrow">02 / Compétences</span>
     <h2 class="sec-title">Technologies &amp; Domaines</h2>
-    <p class="sec-sub">Six domaines construits au fil des projets, des stages et de l'exploration personnelle.</p>
+    <p class="sec-sub">Six domaines appris et maîtrisés au fil des projets, des stages et de l'exploration personnelle.</p>
   </div>
   <div class="skills-grid fade-in">
 
@@ -806,8 +830,7 @@ footer p{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);lett
   </div>
   <div class="proj-list fade-in">
 
-    <!-- PROJET PHARE — Insertion Pro -->
-    <div class="proj-card featured" data-cat="ml web data">
+        <div class="proj-card featured" data-cat="ml web data">
       <div class="proj-inner" style="grid-template-columns:1fr;">
         <div>
           <div class="pc-num">PROJET PHARE — STAGE 2 MOIS · SUPMTI OUJDA · 2025</div>
@@ -834,35 +857,17 @@ footer p{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);lett
     </div>
 
     <!-- Alzheimer -->
-    <div class="proj-card" data-cat="dl ml data">
+
+    
+
+        <div class="proj-card" data-cat="data ml">
       <div class="proj-inner">
         <div>
           <div class="pc-num">01</div>
-          <div class="pc-title">Analyse de la Maladie d'Alzheimer</div>
-          <div class="pc-tech">Python · Deep Learning · Machine Learning · Google Colab</div>
-          <div class="pc-desc">Recherche et analyse de données sur Alzheimer — modèles DL et ML sur données volumineuses, prétraitement, entraînement et évaluation de modèles.</div>
-          <div class="pc-tags"><span class="pc-tag">Deep Learning</span><span class="pc-tag">Scikit-learn</span><span class="pc-tag">Google Colab</span><span class="pc-tag">EDA</span></div>
-          <div class="proof-zone">
-            <span class="proof-label">Preuves</span>
-            <a href="https://github.com/Rinoh16/alzheimer-analyse" target="_blank" class="proof-btn pb-github">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.59 2 12.25c0 4.53 2.865 8.37 6.839 9.73.5.096.682-.223.682-.495 0-.244-.01-.89-.014-1.748-2.782.618-3.37-1.387-3.37-1.387-.454-1.183-1.11-1.498-1.11-1.498-.908-.638.069-.625.069-.625 1.003.072 1.531 1.056 1.531 1.056.892 1.566 2.341 1.114 2.91.852.09-.663.349-1.114.635-1.37-2.22-.262-4.555-1.14-4.555-5.073 0-1.12.389-2.035 1.029-2.752-.103-.26-.446-1.312.098-2.736 0 0 .84-.276 2.75 1.052A9.303 9.303 0 0 1 12 6.836c.85.004 1.705.117 2.504.343 1.909-1.328 2.747-1.052 2.747-1.052.546 1.424.203 2.475.1 2.736.64.717 1.027 1.632 1.027 2.752 0 3.944-2.338 4.81-4.565 5.066.36.318.678.948.678 1.91 0 1.378-.012 2.489-.012 2.828 0 .275.18.597.688.494C19.137 20.617 22 16.777 22 12.25 22 6.59 17.523 2 12 2Z"/></svg>
-              GitHub
-            </a>
-          </div>
-        </div>
-        <div class="pc-proof"><span class="pc-year">2024–2025</span></div>
-      </div>
-    </div>
-
-    <!-- Accéléromètrie -->
-    <div class="proj-card" data-cat="data ml">
-      <div class="proj-inner">
-        <div>
-          <div class="pc-num">02</div>
           <div class="pc-title">Analyse de Données Accéléromètriques</div>
           <div class="pc-tech">Python · Jupyter Notebook · Google Colab · Visualisation</div>
           <div class="pc-desc">Compréhension des activités physiques via données d'accéléromètre — transformations, visualisations interactives et analyses statistiques. Projet en cours.</div>
-          <div class="pc-tags"><span class="pc-tag">Jupyter</span><span class="pc-tag">Signal Processing</span><span class="pc-tag">Matplotlib</span><span class="pc-tag">Pandas</span></div>
+          <div class="pc-tags"><span class="pc-tag">Jupyter</span><span class="pc-tag">Matplotlib</span><span class="pc-tag">Pandas</span></div>
           <div class="proof-zone">
             <span class="proof-label">Preuves</span>
             <a href="https://github.com/Rinoh16/accelero" target="_blank" class="proof-btn pb-github">
@@ -875,40 +880,18 @@ footer p{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);lett
             </span>
           </div>
         </div>
-        <div class="pc-proof"><span class="pc-year">2024–2025</span></div>
+        <div class="pc-proof"><span class="pc-year">2026</span></div>
       </div>
     </div>
 
     <!-- RDV Médical -->
-    <div class="proj-card" data-cat="web">
-      <div class="proj-inner">
-        <div>
-          <div class="pc-num">03</div>
-          <div class="pc-title">Application de Prise de Rendez-vous Médical</div>
-          <div class="pc-tech">PHP · MySQL · HTML / CSS · JavaScript · XAMPP</div>
-          <div class="pc-desc">Site web complet de gestion de rendez-vous médicaux — espace patient, médecin et admin. Base MySQL, authentification et gestion de planning. Développé sous XAMPP.</div>
-          <div class="pc-tags"><span class="pc-tag">PHP</span><span class="pc-tag">MySQL</span><span class="pc-tag">XAMPP</span><span class="pc-tag">Admin</span><span class="pc-tag">CRUD</span></div>
-          <div class="proof-zone">
-            <span class="proof-label">Preuves</span>
-            <button class="proof-btn pb-video" onclick="openVideo('demo_rdv_medical.mp4','Rendez-vous Médical — Démo','Application PHP/MySQL · XAMPP · Stage L1 2024')">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-              Vidéo démo
-            </button>
-            <a href="https://github.com/Rinoh16/website_projet" target="_blank" class="proof-btn pb-github">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.59 2 12.25c0 4.53 2.865 8.37 6.839 9.73.5.096.682-.223.682-.495 0-.244-.01-.89-.014-1.748-2.782.618-3.37-1.387-3.37-1.387-.454-1.183-1.11-1.498-1.11-1.498-.908-.638.069-.625.069-.625 1.003.072 1.531 1.056 1.531 1.056.892 1.566 2.341 1.114 2.91.852.09-.663.349-1.114.635-1.37-2.22-.262-4.555-1.14-4.555-5.073 0-1.12.389-2.035 1.029-2.752-.103-.26-.446-1.312.098-2.736 0 0 .84-.276 2.75 1.052A9.303 9.303 0 0 1 12 6.836c.85.004 1.705.117 2.504.343 1.909-1.328 2.747-1.052 2.747-1.052.546 1.424.203 2.475.1 2.736.64.717 1.027 1.632 1.027 2.752 0 3.944-2.338 4.81-4.565 5.066.36.318.678.948.678 1.91 0 1.378-.012 2.489-.012 2.828 0 .275.18.597.688.494C19.137 20.617 22 16.777 22 12.25 22 6.59 17.523 2 12 2Z"/></svg>
-              GitHub
-            </a>
-          </div>
-        </div>
-        <div class="pc-proof"><span class="pc-year">Stage · 2024</span></div>
-      </div>
-    </div>
 
-    <!-- Éditeur d'images Java -->
-    <div class="proj-card" data-cat="jeu">
+    
+
+        <div class="proj-card" data-cat="jeu">
       <div class="proj-inner">
         <div>
-          <div class="pc-num">04</div>
+          <div class="pc-num">02</div>
           <div class="pc-title">Éditeur d'Images — Interface Graphique Java</div>
           <div class="pc-tech">Java · IntelliJ · H2 Database · JavaFX</div>
           <div class="pc-desc">Application de modification d'images avec GUI Java/JavaFX — filtres, transformations et gestion via base H2 pour tests et recherche par tags. Projet en cours.</div>
@@ -929,15 +912,42 @@ footer p{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);lett
             </span>
           </div>
         </div>
-        <div class="pc-proof"><span class="pc-year">2024–2025</span></div>
+        <div class="pc-proof"><span class="pc-year">2026</span></div>
       </div>
     </div>
 
     <!-- Gestion restaurant -->
-    <div class="proj-card" data-cat="data web">
+
+    
+
+        <div class="proj-card" data-cat="dl ml data">
       <div class="proj-inner">
         <div>
-          <div class="pc-num">05</div>
+          <div class="pc-num">03</div>
+          <div class="pc-title">Analyse de la Maladie d'Alzheimer</div>
+          <div class="pc-tech">Python · Deep Learning · Machine Learning · Google Colab</div>
+          <div class="pc-desc">Recherche et analyse de données sur Alzheimer — modèles DL et ML sur données volumineuses, prétraitement, entraînement et évaluation de modèles.</div>
+          <div class="pc-tags"><span class="pc-tag">Deep Learning</span><span class="pc-tag">Scikit-learn</span><span class="pc-tag">Google Colab</span><span class="pc-tag">EDA</span></div>
+          <div class="proof-zone">
+            <span class="proof-label">Preuves</span>
+            <a href="https://github.com/Rinoh16/alzheimer-analyse" target="_blank" class="proof-btn pb-github">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.59 2 12.25c0 4.53 2.865 8.37 6.839 9.73.5.096.682-.223.682-.495 0-.244-.01-.89-.014-1.748-2.782.618-3.37-1.387-3.37-1.387-.454-1.183-1.11-1.498-1.11-1.498-.908-.638.069-.625.069-.625 1.003.072 1.531 1.056 1.531 1.056.892 1.566 2.341 1.114 2.91.852.09-.663.349-1.114.635-1.37-2.22-.262-4.555-1.14-4.555-5.073 0-1.12.389-2.035 1.029-2.752-.103-.26-.446-1.312.098-2.736 0 0 .84-.276 2.75 1.052A9.303 9.303 0 0 1 12 6.836c.85.004 1.705.117 2.504.343 1.909-1.328 2.747-1.052 2.747-1.052.546 1.424.203 2.475.1 2.736.64.717 1.027 1.632 1.027 2.752 0 3.944-2.338 4.81-4.565 5.066.36.318.678.948.678 1.91 0 1.378-.012 2.489-.012 2.828 0 .275.18.597.688.494C19.137 20.617 22 16.777 22 12.25 22 6.59 17.523 2 12 2Z"/></svg>
+              GitHub
+            </a>
+          </div>
+        </div>
+        <div class="pc-proof"><span class="pc-year">2025</span></div>
+      </div>
+    </div>
+
+    <!-- Accéléromètrie -->
+
+    
+
+        <div class="proj-card" data-cat="data web">
+      <div class="proj-inner">
+        <div>
+          <div class="pc-num">04</div>
           <div class="pc-title">Base de Données — Gestion de Restaurant</div>
           <div class="pc-tech">MySQL · SQL avancé · Modélisation Merise</div>
           <div class="pc-desc">Conception et implémentation complète d'une BDD restaurant — menus, commandes, stocks, personnel et reporting analytique.</div>
@@ -950,22 +960,25 @@ footer p{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);lett
             </a>
           </div>
         </div>
-        <div class="pc-proof"><span class="pc-year">2023–2024</span></div>
+        <div class="pc-proof"><span class="pc-year">2025</span></div>
       </div>
     </div>
 
     <!-- Pacman -->
-    <div class="proj-card" data-cat="jeu">
+
+    
+
+        <div class="proj-card" data-cat="jeu">
       <div class="proj-inner">
         <div>
-          <div class="pc-num">06</div>
+          <div class="pc-num">05</div>
           <div class="pc-title">Jeu Vidéo Pac-Man</div>
           <div class="pc-tech">Processing · Java</div>
           <div class="pc-desc">Jeu Pac-Man fonctionnel — déplacements, collisions, IA des fantômes et système de score.</div>
           <div class="pc-tags"><span class="pc-tag">Processing</span><span class="pc-tag">Game Dev</span><span class="pc-tag">Algorithmes</span></div>
           <div class="proof-zone">
             <span class="proof-label">Preuves</span>
-            <button class="proof-btn pb-video" onclick="openVideo('demo_pacman.mp4','Pac-Man — Démo','Processing · Java · 2024')">
+            <button class="proof-btn pb-video" onclick="openVideo('demo_pacman.mp4','Pac-Man — Démo','Processing · Java · 2025')">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
               Vidéo de jeu
             </button>
@@ -975,9 +988,37 @@ footer p{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);lett
             </a>
           </div>
         </div>
-        <div class="pc-proof"><span class="pc-year">2023–2024</span></div>
+        <div class="pc-proof"><span class="pc-year">2025</span></div>
       </div>
     </div>
+
+    
+
+        <div class="proj-card" data-cat="web">
+      <div class="proj-inner">
+        <div>
+          <div class="pc-num">06</div>
+          <div class="pc-title">Application de Prise de Rendez-vous Médical</div>
+          <div class="pc-tech">PHP · MySQL · HTML / CSS · JavaScript · XAMPP</div>
+          <div class="pc-desc">Site web complet de gestion de rendez-vous médicaux — espace patient, médecin et admin. Base MySQL, authentification et gestion de planning. Développé sous XAMPP.</div>
+          <div class="pc-tags"><span class="pc-tag">PHP</span><span class="pc-tag">MySQL</span><span class="pc-tag">XAMPP</span><span class="pc-tag">Admin</span></div>
+          <div class="proof-zone">
+            <span class="proof-label">Preuves</span>
+            <button class="proof-btn pb-video" onclick="openVideo('demo_rdv_medical.mp4','Rendez-vous Médical — Démo','Application PHP/MySQL · XAMPP · Stage L1 2024')">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              Vidéo démo
+            </button>
+            <a href="https://github.com/Rinoh16/website_projet" target="_blank" class="proof-btn pb-github">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.59 2 12.25c0 4.53 2.865 8.37 6.839 9.73.5.096.682-.223.682-.495 0-.244-.01-.89-.014-1.748-2.782.618-3.37-1.387-3.37-1.387-.454-1.183-1.11-1.498-1.11-1.498-.908-.638.069-.625.069-.625 1.003.072 1.531 1.056 1.531 1.056.892 1.566 2.341 1.114 2.91.852.09-.663.349-1.114.635-1.37-2.22-.262-4.555-1.14-4.555-5.073 0-1.12.389-2.035 1.029-2.752-.103-.26-.446-1.312.098-2.736 0 0 .84-.276 2.75 1.052A9.303 9.303 0 0 1 12 6.836c.85.004 1.705.117 2.504.343 1.909-1.328 2.747-1.052 2.747-1.052.546 1.424.203 2.475.1 2.736.64.717 1.027 1.632 1.027 2.752 0 3.944-2.338 4.81-4.565 5.066.36.318.678.948.678 1.91 0 1.378-.012 2.489-.012 2.828 0 .275.18.597.688.494C19.137 20.617 22 16.777 22 12.25 22 6.59 17.523 2 12 2Z"/></svg>
+              GitHub
+            </a>
+          </div>
+        </div>
+        <div class="pc-proof"><span class="pc-year">Juin – Août 2024</span></div>
+      </div>
+    </div>
+
+    <!-- Éditeur d'images Java -->
 
   </div>
 </div>
@@ -1163,7 +1204,7 @@ footer p{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);lett
           <div class="fg"><label class="flabel">Nom</label><input class="finput" id="lname" name="from_last_name" placeholder="Dupont"></div>
         </div>
         <div class="fg"><label class="flabel">Email</label><input class="finput" id="email" name="reply_to" type="email" placeholder="jean@exemple.fr" required></div>
-        <div class="fg"><label class="flabel">Sujet</label><input class="finput" id="subject" name="subject" placeholder="Opportunité de stage Data Science..." required></div>
+        <div class="fg"><label class="flabel">Sujet</label><input class="finput" id="subject" name="subject" placeholder="Votre objet..." required></div>
         
         <input type="hidden" name="to_name" value="RAJAOTIANA Rinoh Dominique">
         <input type="hidden" name="to_email" value="rajaotianar@gmail.com">
@@ -1180,9 +1221,8 @@ footer p{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);lett
 </div>
 </section>
 
-<footer>
-  <p>RAJAOTIANA Rinoh Dominique · L2 Informatique · Université de Limoges · 2025–2026</p>
-  <p>rajaotianar@gmail.com · +33 6 26 96 51 37 · Limoges 87000</p>
+<footer style="justify-content:center;">
+  <p>© 2026 RAJAOTIANA Rinoh Dominique — Tous droits réservés</p>
 </footer>
 
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
@@ -1241,7 +1281,10 @@ document.querySelectorAll('.proj-card').forEach(card=>{
 });
 
 /* ══ NAV ══ */
-function toggleMenu(){document.getElementById('mobileNav').classList.toggle('open');}
+function toggleMenu(){
+  document.getElementById('mobileNav').classList.toggle('open');
+  document.querySelector('.menu-btn').classList.toggle('open');
+}
 addEventListener('scroll',()=>{
   const n=document.getElementById('navbar');
   n.style.padding=scrollY>60?'.65rem 3.5rem':'1.1rem 3.5rem';
