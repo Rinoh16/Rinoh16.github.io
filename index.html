@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr" data-theme="dark">
+<html lang="fr" data-theme="dark" data-lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -80,6 +80,20 @@ nav{
 .theme-btn:hover{border-color:var(--accent);color:var(--accent);}
 .theme-btn svg{transition:transform .4s;}
 [data-theme="light"] .theme-btn svg{transform:rotate(180deg);}
+
+/* lang toggle */
+.lang-btn{
+  display:flex;align-items:center;gap:.4rem;
+  font-family:'DM Mono',monospace;font-size:.63rem;letter-spacing:.08em;
+  color:var(--muted2);border:1px solid var(--border2);
+  background:var(--bg3);padding:.38rem .8rem;border-radius:20px;
+  cursor:pointer;transition:all .25s;
+}
+.lang-btn:hover{border-color:var(--accent2);color:var(--accent2);}
+.lang-btn.en{border-color:rgba(167,139,250,.35);color:var(--accent2);background:rgba(167,139,250,.06);}
+/* traduction — éléments cachés selon la langue */
+[data-lang="fr"] .en-only{display:none!important;}
+[data-lang="en"] .fr-only{display:none!important;}
 
 .nav-cta{
   font-family:'DM Mono',monospace;font-size:.7rem;letter-spacing:.1em;
@@ -642,14 +656,18 @@ footer p{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);lett
 <nav id="navbar">
   <div class="nav-logo">R.D.R</div>
   <ul class="nav-links">
-    <li><a href="#about">À propos</a></li>
-    <li><a href="#skills">Compétences</a></li>
-    <li><a href="#projects">Projets</a></li>
+    <li><a href="#about"><span class="fr-only">À propos</span><span class="en-only">About</span></a></li>
+    <li><a href="#skills"><span class="fr-only">Compétences</span><span class="en-only">Skills</span></a></li>
+    <li><a href="#projects"><span class="fr-only">Projets</span><span class="en-only">Projects</span></a></li>
     <li><a href="#cv">CV</a></li>
-    <li><a href="#parcours">Parcours</a></li>
+    <li><a href="#parcours"><span class="fr-only">Parcours</span><span class="en-only">Journey</span></a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
   <div class="nav-right">
+    <button class="lang-btn" onclick="toggleLang()" id="langBtn" title="Switch language">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 8l6 6"/><path d="m4 14 6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="m22 22-5-10-5 10"/><path d="M14 18h6"/></svg>
+      <span id="langLbl">EN</span>
+    </button>
     <button class="theme-btn" onclick="toggleTheme()" id="themeBtn">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
       <span id="themeLbl">Clair</span>
@@ -659,11 +677,11 @@ footer p{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);lett
   </div>
 </nav>
 <div class="mobile-nav" id="mobileNav">
-  <a href="#about" onclick="toggleMenu()">À propos</a>
-  <a href="#skills" onclick="toggleMenu()">Compétences</a>
-  <a href="#projects" onclick="toggleMenu()">Projets</a>
+  <a href="#about" onclick="toggleMenu()"><span class="fr-only">À propos</span><span class="en-only">About</span></a>
+  <a href="#skills" onclick="toggleMenu()"><span class="fr-only">Compétences</span><span class="en-only">Skills</span></a>
+  <a href="#projects" onclick="toggleMenu()"><span class="fr-only">Projets</span><span class="en-only">Projects</span></a>
   <a href="#cv" onclick="toggleMenu()">CV</a>
-  <a href="#parcours" onclick="toggleMenu()">Parcours</a>
+  <a href="#parcours" onclick="toggleMenu()"><span class="fr-only">Parcours</span><span class="en-only">Journey</span></a>
   <a href="#contact" onclick="toggleMenu()">Contact</a>
 </div>
 
@@ -671,13 +689,14 @@ footer p{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);lett
 <section>
 <div id="hero">
   <div style="position:relative;z-index:1;">
-    <div class="hero-badge"><span class="pulse"></span>Disponible — Stage &amp; Alternance 2025–2026</div>
+    <div class="hero-badge"><span class="pulse"></span><span class="fr-only">Disponible — Stage &amp; Alternance 2025–2026</span><span class="en-only">Available — Internship &amp; Work-Study 2025–2026</span></div>
     <h1 class="hero-name">
       RAJAOTIANA<br>
       <span class="outline">Rinoh</span><span class="outline2"> D.</span>
     </h1>
     <p class="hero-desc">
-      Étudiant en <strong>L2 Informatique</strong> à l'Université de Limoges — passionné par la Data Science, le Machine Learning et les avancées de l'IA. Curieux insatiable, j'apprends vite et construis des solutions intelligentes à partir des données.
+      <span class="fr-only">Étudiant en <strong>L2 Informatique</strong> à l'Université de Limoges — passionné par la Data Science, le Machine Learning et les avancées de l'IA. Curieux insatiable, j'apprends vite et construis des solutions intelligentes à partir des données.</span>
+      <span class="en-only">Computer Science student <strong>(L2)</strong> at the University of Limoges — passionate about Data Science, Machine Learning and AI advances. Fast learner, I build intelligent solutions from data.</span>
     </p>
     <div class="hero-tags">
       <span class="hero-tag">Python</span>
@@ -690,12 +709,12 @@ footer p{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);lett
     </div>
     <div class="hero-ctas">
       <a href="#projects" class="btn btn-primary">
-        Voir mes projets
+        <span class="fr-only">Voir mes projets</span><span class="en-only">View my projects</span>
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m13 5 7 7-7 7"/></svg>
       </a>
       <a href="cv2.pdf" download class="btn btn-ghost">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/></svg>
-        Télécharger CV
+        <span class="fr-only">Télécharger CV</span><span class="en-only">Download Resume</span>
       </a>
     </div>
   </div>
@@ -723,14 +742,16 @@ footer p{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);lett
 <div class="sw">
   <div class="about-grid fade-in">
     <div>
-      <span class="eyebrow">01 / À propos</span>
-      <div class="big-q">Données,<br><em>intelligence</em><br>et <span>impact.</span></div>
-      <p class="about-text">Passionné par les avancées technologiques — notamment l'IA et tout ce qui touche à l'automatisation intelligente — je me spécialise dans la Data Science et le Machine Learning. J'aime comprendre les données en profondeur, construire des modèles qui apprennent, et visualiser ce qui n'est pas immédiatement visible.</p>
-      <p class="about-text">Mon parcours entre Madagascar, le Maroc et la France m'a forgé une adaptabilité rare, une curiosité permanente et une aisance naturelle avec plusieurs langues — je parle couramment français, anglais et malgache. Que ce soit aux échecs, dans les jeux vidéo ou dans l'apprentissage d'une nouvelle technologie, j'applique la même rigueur et la même envie de progresser vite.</p>
+      <span class="eyebrow"><span class="fr-only">01 / À propos</span><span class="en-only">01 / About</span></span>
+      <div class="big-q"><span class="fr-only">Données,<br><em>intelligence</em><br>et <span>impact.</span></span><span class="en-only">Data,<br><em>intelligence</em><br>&amp; <span>impact.</span></span></div>
+      <p class="about-text fr-only">Passionné par les avancées technologiques — notamment l'IA et tout ce qui touche à l'automatisation intelligente — je me spécialise dans la Data Science et le Machine Learning. J'aime comprendre les données en profondeur, construire des modèles qui apprennent, et visualiser ce qui n'est pas immédiatement visible.</p>
+      <p class="about-text en-only">Passionate about technological advances — especially AI and intelligent automation — I specialise in Data Science and Machine Learning. I love diving deep into data, building models that learn, and visualising what isn't immediately visible.</p>
+      <p class="about-text fr-only">Mon parcours entre Madagascar, le Maroc et la France m'a forgé une adaptabilité rare, une curiosité permanente et une aisance naturelle avec plusieurs langues — je parle couramment français, anglais et malgache. Que ce soit aux échecs, dans les jeux vidéo ou dans l'apprentissage d'une nouvelle technologie, j'applique la même rigueur et la même envie de progresser vite.</p>
+      <p class="about-text en-only">My journey across Madagascar, Morocco and France has shaped rare adaptability, constant curiosity and a natural ease with multiple languages — I speak French, English and Malagasy fluently. Whether playing chess, gaming or learning a new technology, I bring the same rigour and drive to improve fast.</p>
       <div class="kpi-row">
-        <div class="kpi"><span class="kpi-n">6+</span><span class="kpi-l">Projets</span></div>
-        <div class="kpi"><span class="kpi-n">2</span><span class="kpi-l">Stages</span></div>
-        <div class="kpi"><span class="kpi-n">3</span><span class="kpi-l">Pays</span></div>
+        <div class="kpi"><span class="kpi-n">6+</span><span class="kpi-l"><span class="fr-only">Projets</span><span class="en-only">Projects</span></span></div>
+        <div class="kpi"><span class="kpi-n">2</span><span class="kpi-l"><span class="fr-only">Stages</span><span class="en-only">Internships</span></span></div>
+        <div class="kpi"><span class="kpi-n">3</span><span class="kpi-l"><span class="fr-only">Pays</span><span class="en-only">Countries</span></span></div>
       </div>
     </div>
     <div>
@@ -749,21 +770,23 @@ footer p{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);lett
 <section id="skills">
 <div class="sw">
   <div class="fade-in">
-    <span class="eyebrow">02 / Compétences</span>
-    <h2 class="sec-title">Technologies &amp; Domaines</h2>
-    <p class="sec-sub">Six domaines appris et maîtrisés au fil des projets, des stages et de l'exploration personnelle.</p>
+    <span class="eyebrow"><span class="fr-only">02 / Compétences</span><span class="en-only">02 / Skills</span></span>
+    <h2 class="sec-title"><span class="fr-only">Technologies &amp; Domaines</span><span class="en-only">Technologies &amp; Domains</span></h2>
+    <p class="sec-sub fr-only">Six domaines appris et maîtrisés au fil des projets, des stages et de l'exploration personnelle.</p>
+    <p class="sec-sub en-only">Six domains learned and mastered through projects, internships and personal exploration.</p>
   </div>
   <div class="skills-grid fade-in">
 
     <!-- Intelligence Artificielle -->
     <div class="sk-card">
       <div class="sk-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><circle cx="12" cy="5" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="19" cy="19" r="2"/><circle cx="12" cy="14" r="2"/><line x1="12" y1="7" x2="12" y2="12"/><line x1="6.5" y1="17.5" x2="10.5" y2="15.5"/><line x1="17.5" y1="17.5" x2="13.5" y2="15.5"/></svg></div>
-      <div class="sk-name">Intelligence Artificielle</div>
-      <div class="sk-desc">Conception et entraînement de modèles supervisés et non supervisés, deep learning sur données réelles.</div>
+      <div class="sk-name"><span class="fr-only">Intelligence Artificielle</span><span class="en-only">Artificial Intelligence</span></div>
+      <div class="sk-desc fr-only">Conception et entraînement de modèles supervisés et non supervisés, deep learning sur données réelles.</div>
+      <div class="sk-desc en-only">Designing and training supervised and unsupervised models, deep learning on real-world data.</div>
       <div style="margin-bottom:.9rem;">
         <div class="prog-wrap"><div class="prog-label"><span>Machine Learning</span><span>85%</span></div><div class="prog-bar"><div class="prog-fill" data-w="85"></div></div></div>
         <div class="prog-wrap"><div class="prog-label"><span>Deep Learning</span><span>70%</span></div><div class="prog-bar"><div class="prog-fill" data-w="70"></div></div></div>
-        <div class="prog-wrap"><div class="prog-label"><span>Analyse &amp; Visualisation</span><span>88%</span></div><div class="prog-bar"><div class="prog-fill" data-w="88"></div></div></div>
+        <div class="prog-wrap"><div class="prog-label"><span><span class="fr-only">Analyse &amp; Visualisation</span><span class="en-only">Analysis &amp; Visualisation</span></span><span>88%</span></div><div class="prog-bar"><div class="prog-fill" data-w="88"></div></div></div>
       </div>
       <div class="sk-tags"><span class="sk-tag hi">Scikit-learn</span><span class="sk-tag hi">TensorFlow</span><span class="sk-tag">Keras</span><span class="sk-tag">Pandas</span><span class="sk-tag">NumPy</span><span class="sk-tag">Matplotlib</span></div>
     </div>
@@ -771,8 +794,9 @@ footer p{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);lett
     <!-- Langages de programmation -->
     <div class="sk-card">
       <div class="sk-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
-      <div class="sk-name">Langages</div>
-      <div class="sk-desc">Polyvalence sur plusieurs paradigmes — scripts, systèmes, objets et logique.</div>
+      <div class="sk-name"><span class="fr-only">Langages</span><span class="en-only">Languages</span></div>
+      <div class="sk-desc fr-only">Polyvalence sur plusieurs paradigmes — scripts, systèmes, objets et logique.</div>
+      <div class="sk-desc en-only">Versatility across multiple paradigms — scripting, systems, object-oriented and logic.</div>
       <div style="margin-bottom:.9rem;">
         <div class="prog-wrap"><div class="prog-label"><span>Python</span><span>90%</span></div><div class="prog-bar"><div class="prog-fill" data-w="90"></div></div></div>
         <div class="prog-wrap"><div class="prog-label"><span>Java / PHP / C</span><span>72%</span></div><div class="prog-bar"><div class="prog-fill" data-w="72"></div></div></div>
@@ -784,8 +808,9 @@ footer p{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);lett
     <!-- Développement Web -->
     <div class="sk-card">
       <div class="sk-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
-      <div class="sk-name">Développement Web</div>
-      <div class="sk-desc">Applications full-stack de bout en bout — backend, frontend, authentification et déploiement.</div>
+      <div class="sk-name"><span class="fr-only">Développement Web</span><span class="en-only">Web Development</span></div>
+      <div class="sk-desc fr-only">Applications full-stack de bout en bout — backend, frontend, authentification et déploiement.</div>
+      <div class="sk-desc en-only">End-to-end full-stack applications — backend, frontend, authentication and deployment.</div>
       <div style="margin-bottom:.9rem;">
         <div class="prog-wrap"><div class="prog-label"><span>Django (backend)</span><span>80%</span></div><div class="prog-bar"><div class="prog-fill" data-w="80"></div></div></div>
         <div class="prog-wrap"><div class="prog-label"><span>HTML / CSS / JS</span><span>78%</span></div><div class="prog-bar"><div class="prog-fill" data-w="78"></div></div></div>
@@ -797,8 +822,9 @@ footer p{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);lett
     <!-- Données & Bases -->
     <div class="sk-card">
       <div class="sk-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></div>
-      <div class="sk-name">Données &amp; Bases</div>
-      <div class="sk-desc">Modélisation, requêtage avancé et gestion de bases relationnelles et orientées document.</div>
+      <div class="sk-name"><span class="fr-only">Données &amp; Bases</span><span class="en-only">Data &amp; Databases</span></div>
+      <div class="sk-desc fr-only">Modélisation, requêtage avancé et gestion de bases relationnelles et orientées document.</div>
+      <div class="sk-desc en-only">Modelling, advanced querying and management of relational and document-oriented databases.</div>
       <div style="margin-bottom:.9rem;">
         <div class="prog-wrap"><div class="prog-label"><span>MySQL / SQL</span><span>83%</span></div><div class="prog-bar"><div class="prog-fill" data-w="83"></div></div></div>
         <div class="prog-wrap"><div class="prog-label"><span>NoSQL</span><span>65%</span></div><div class="prog-bar"><div class="prog-fill" data-w="65"></div></div></div>
@@ -810,8 +836,9 @@ footer p{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);lett
     <!-- Outils & Workflow -->
     <div class="sk-card">
       <div class="sk-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
-      <div class="sk-name">Outils &amp; Workflow</div>
-      <div class="sk-desc">Environnements de développement, contrôle de version et notebooks pour la data.</div>
+      <div class="sk-name"><span class="fr-only">Outils &amp; Workflow</span><span class="en-only">Tools &amp; Workflow</span></div>
+      <div class="sk-desc fr-only">Environnements de développement, contrôle de version et notebooks pour la data.</div>
+      <div class="sk-desc en-only">Development environments, version control and data notebooks.</div>
       <div style="margin-bottom:.9rem;">
         <div class="prog-wrap"><div class="prog-label"><span>Git / GitHub</span><span>80%</span></div><div class="prog-bar"><div class="prog-fill" data-w="80"></div></div></div>
         <div class="prog-wrap"><div class="prog-label"><span>Jupyter / Google Colab</span><span>87%</span></div><div class="prog-bar"><div class="prog-fill" data-w="87"></div></div></div>
@@ -822,17 +849,18 @@ footer p{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);lett
     <!-- Langues -->
     <div class="sk-card">
       <div class="sk-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M5 8l6 6"/><path d="m4 14 6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="m22 22-5-10-5 10"/><path d="M14 18h6"/></svg></div>
-      <div class="sk-name">Langues</div>
-      <div class="sk-desc">Multilinguisme développé naturellement à travers un parcours de vie sur trois continents.</div>
+      <div class="sk-name"><span class="fr-only">Langues</span><span class="en-only">Spoken Languages</span></div>
+      <div class="sk-desc fr-only">Multilinguisme développé naturellement à travers un parcours de vie sur trois continents.</div>
+      <div class="sk-desc en-only">Multilingualism developed naturally through a life journey across three continents.</div>
       <div style="margin-bottom:.9rem;">
-        <div class="prog-wrap"><div class="prog-label"><span>Malgache</span><span>Natif</span></div><div class="prog-bar"><div class="prog-fill" data-w="100"></div></div></div>
-        <div class="prog-wrap"><div class="prog-label"><span>Français <span style="font-size:.6rem;opacity:.7;">(DELF B2)</span></span><span>Certifié B2</span></div><div class="prog-bar"><div class="prog-fill" data-w="92"></div></div></div>
-        <div class="prog-wrap"><div class="prog-label"><span>Anglais <span style="font-size:.6rem;opacity:.65;">(courant, non certifié)</span></span><span>B1-B2</span></div><div class="prog-bar"><div class="prog-fill" data-w="72"></div></div></div>
+        <div class="prog-wrap"><div class="prog-label"><span><span class="fr-only">Malgache</span><span class="en-only">Malagasy</span></span><span><span class="fr-only">Natif</span><span class="en-only">Native</span></span></div><div class="prog-bar"><div class="prog-fill" data-w="100"></div></div></div>
+        <div class="prog-wrap"><div class="prog-label"><span><span class="fr-only">Français</span><span class="en-only">French</span> <span style="font-size:.6rem;opacity:.7;">(DELF B2)</span></span><span><span class="fr-only">Certifié B2</span><span class="en-only">Certified B2</span></span></div><div class="prog-bar"><div class="prog-fill" data-w="92"></div></div></div>
+        <div class="prog-wrap"><div class="prog-label"><span><span class="fr-only">Anglais</span><span class="en-only">English</span> <span style="font-size:.6rem;opacity:.65;"><span class="fr-only">(courant, non certifié)</span><span class="en-only">(fluent, uncertified)</span></span></span><span>B1-B2</span></div><div class="prog-bar"><div class="prog-fill" data-w="72"></div></div></div>
       </div>
       <div class="sk-tags">
-        <span class="sk-tag hi">Malgache — natif</span>
-        <span class="sk-tag hi">Français — DELF B2</span>
-        <span class="sk-tag">Anglais — courant</span>
+        <span class="sk-tag hi fr-only">Malgache — natif</span><span class="sk-tag hi en-only">Malagasy — native</span>
+        <span class="sk-tag hi fr-only">Français — DELF B2</span><span class="sk-tag hi en-only">French — DELF B2</span>
+        <span class="sk-tag fr-only">Anglais — courant</span><span class="sk-tag en-only">English — fluent</span>
       </div>
     </div>
 
@@ -846,36 +874,37 @@ footer p{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);lett
 <section id="projects">
 <div class="sw">
   <div class="fade-in">
-    <span class="eyebrow">03 / Projets</span>
-    <h2 class="sec-title">Réalisations</h2>
-    <p class="sec-sub">Projets académiques et de stage. Vidéos de démonstration et code source disponibles.</p>
+    <span class="eyebrow"><span class="fr-only">03 / Projets</span><span class="en-only">03 / Projects</span></span>
+    <h2 class="sec-title"><span class="fr-only">Réalisations</span><span class="en-only">Work</span></h2>
+    <p class="sec-sub fr-only">Projets académiques et de stage. Vidéos de démonstration et code source disponibles.</p>
+    <p class="sec-sub en-only">Academic and internship projects. Demo videos and source code available.</p>
   </div>
   <div class="filter-row fade-in">
-    <button class="fbtn active" data-filter="all">Tous</button>
+    <button class="fbtn active" data-filter="all"><span class="fr-only">Tous</span><span class="en-only">All</span></button>
     <button class="fbtn" data-filter="ml">Machine Learning</button>
     <button class="fbtn" data-filter="dl">Deep Learning</button>
     <button class="fbtn" data-filter="web">Web</button>
     <button class="fbtn" data-filter="data">Data</button>
-    <button class="fbtn" data-filter="jeu">Jeu / Autre</button>
+    <button class="fbtn" data-filter="jeu"><span class="fr-only">Jeu / Autre</span><span class="en-only">Game / Other</span></button>
   </div>
   <div class="proj-list fade-in">
 
         <div class="proj-card featured" data-cat="ml web data">
       <div class="proj-inner" style="grid-template-columns:1fr;">
         <div>
-          <div class="pc-num">PROJET PHARE — STAGE 2 MOIS · SUPMTI OUJDA · 2025</div>
+          <div class="pc-num"><span class="fr-only">PROJET PHARE — STAGE 2 MOIS · SUPMTI OUJDA · 2025</span><span class="en-only">FLAGSHIP PROJECT — 2-MONTH INTERNSHIP · SUPMTI OUJDA · 2025</span></div>
           <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:.8rem;margin-bottom:.6rem;">
-            <div class="pc-title">Plateforme de Prédiction d'Insertion Professionnelle</div>
+            <div class="pc-title"><span class="fr-only">Plateforme de Prédiction d'Insertion Professionnelle</span><span class="en-only">Professional Integration Prediction Platform</span></div>
             <span class="pc-year">Avril – Juin 2025</span>
           </div>
           <div class="pc-tech">Django (PyDev) · Python · MySQL · Scikit-learn · HTML/CSS</div>
-          <div class="pc-desc">Application web complète d'analyse et prédiction de l'insertion professionnelle des étudiants de SupMTI. Modèle ML intégré, interface d'administration, tableaux de bord analytiques et base MySQL.</div>
+          <div class="pc-desc"><span class="fr-only">Application web complète d'analyse et prédiction de l'insertion professionnelle des étudiants de SupMTI. Modèle ML intégré, interface d'administration, tableaux de bord analytiques et base MySQL.</span><span class="en-only">Full web application for analysing and predicting the professional integration of SupMTI students. Integrated ML model, admin interface, analytical dashboards and MySQL database.</span></div>
           <div class="pc-tags"><span class="pc-tag">Django</span><span class="pc-tag">Scikit-learn</span><span class="pc-tag">MySQL</span><span class="pc-tag">Data Viz</span><span class="pc-tag">PyDev</span></div>
           <div class="proof-zone">
-            <span class="proof-label">Preuves</span>
+            <span class="proof-label"><span class="fr-only">Preuves</span><span class="en-only">Proof</span></span>
             <button class="proof-btn pb-video" onclick="openVideo('demo_insertion_pro.mp4','Insertion Professionnelle — Démo','Application Django + ML · SupMTI 2025')">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-              Vidéo démo
+              <span class="fr-only">Vidéo démo</span><span class="en-only">Demo video</span>
             </button>
             <a href="https://github.com/Rinoh16/App_prediction" target="_blank" class="proof-btn pb-github">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.59 2 12.25c0 4.53 2.865 8.37 6.839 9.73.5.096.682-.223.682-.495 0-.244-.01-.89-.014-1.748-2.782.618-3.37-1.387-3.37-1.387-.454-1.183-1.11-1.498-1.11-1.498-.908-.638.069-.625.069-.625 1.003.072 1.531 1.056 1.531 1.056.892 1.566 2.341 1.114 2.91.852.09-.663.349-1.114.635-1.37-2.22-.262-4.555-1.14-4.555-5.073 0-1.12.389-2.035 1.029-2.752-.103-.26-.446-1.312.098-2.736 0 0 .84-.276 2.75 1.052A9.303 9.303 0 0 1 12 6.836c.85.004 1.705.117 2.504.343 1.909-1.328 2.747-1.052 2.747-1.052.546 1.424.203 2.475.1 2.736.64.717 1.027 1.632 1.027 2.752 0 3.944-2.338 4.81-4.565 5.066.36.318.678.948.678 1.91 0 1.378-.012 2.489-.012 2.828 0 .275.18.597.688.494C19.137 20.617 22 16.777 22 12.25 22 6.59 17.523 2 12 2Z"/></svg>
@@ -894,19 +923,19 @@ footer p{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);lett
       <div class="proj-inner">
         <div>
           <div class="pc-num">01</div>
-          <div class="pc-title">Analyse de Données Accéléromètriques</div>
+          <div class="pc-title"><span class="fr-only">Analyse de Données Accéléromètriques</span><span class="en-only">Accelerometric Data Analysis</span></div>
           <div class="pc-tech">Python · Jupyter Notebook · Google Colab · Visualisation</div>
-          <div class="pc-desc">Compréhension des activités physiques via données d'accéléromètre — transformations, visualisations interactives et analyses statistiques. Projet en cours.</div>
+          <div class="pc-desc"><span class="fr-only">Compréhension des activités physiques via données d'accéléromètre — transformations, visualisations interactives et analyses statistiques. Projet en cours.</span><span class="en-only">Understanding physical activities through accelerometer data — transformations, interactive visualisations and statistical analyses. Ongoing project.</span></div>
           <div class="pc-tags"><span class="pc-tag">Jupyter</span><span class="pc-tag">Matplotlib</span><span class="pc-tag">Pandas</span></div>
           <div class="proof-zone">
-            <span class="proof-label">Preuves</span>
+            <span class="proof-label"><span class="fr-only">Preuves</span><span class="en-only">Proof</span></span>
             <a href="https://github.com/Rinoh16/accelero" target="_blank" class="proof-btn pb-github">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.59 2 12.25c0 4.53 2.865 8.37 6.839 9.73.5.096.682-.223.682-.495 0-.244-.01-.89-.014-1.748-2.782.618-3.37-1.387-3.37-1.387-.454-1.183-1.11-1.498-1.11-1.498-.908-.638.069-.625.069-.625 1.003.072 1.531 1.056 1.531 1.056.892 1.566 2.341 1.114 2.91.852.09-.663.349-1.114.635-1.37-2.22-.262-4.555-1.14-4.555-5.073 0-1.12.389-2.035 1.029-2.752-.103-.26-.446-1.312.098-2.736 0 0 .84-.276 2.75 1.052A9.303 9.303 0 0 1 12 6.836c.85.004 1.705.117 2.504.343 1.909-1.328 2.747-1.052 2.747-1.052.546 1.424.203 2.475.1 2.736.64.717 1.027 1.632 1.027 2.752 0 3.944-2.338 4.81-4.565 5.066.36.318.678.948.678 1.91 0 1.378-.012 2.489-.012 2.828 0 .275.18.597.688.494C19.137 20.617 22 16.777 22 12.25 22 6.59 17.523 2 12 2Z"/></svg>
               GitHub
             </a>
             <span class="proof-btn pb-soon">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-              Rapport en cours
+              <span class="fr-only">Rapport en cours</span><span class="en-only">Report pending</span>
             </span>
           </div>
         </div>
@@ -922,15 +951,15 @@ footer p{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);lett
       <div class="proj-inner">
         <div>
           <div class="pc-num">02</div>
-          <div class="pc-title">Éditeur d'Images — Interface Graphique Java</div>
+          <div class="pc-title"><span class="fr-only">Éditeur d'Images — Interface Graphique Java</span><span class="en-only">Image Editor — Java GUI Application</span></div>
           <div class="pc-tech">Java · IntelliJ · H2 Database · JavaFX</div>
-          <div class="pc-desc">Application de modification d'images avec GUI Java/JavaFX — filtres, transformations et gestion via base H2 pour tests et recherche par tags. Projet en cours.</div>
+          <div class="pc-desc"><span class="fr-only">Application de modification d'images avec GUI Java/JavaFX — filtres, transformations et gestion via base H2 pour tests et recherche par tags. Projet en cours.</span><span class="en-only">Image editing application with Java/JavaFX GUI — filters, transformations and H2 database management for testing and tag-based search. Ongoing project.</span></div>
           <div class="pc-tags"><span class="pc-tag">Java</span><span class="pc-tag">JavaFX</span><span class="pc-tag">IntelliJ</span><span class="pc-tag">H2 DB</span><span class="pc-tag">GUI</span></div>
           <div class="proof-zone">
-            <span class="proof-label">Preuves</span>
+            <span class="proof-label"><span class="fr-only">Preuves</span><span class="en-only">Proof</span></span>
             <button class="proof-btn pb-video" onclick="openVideo('demo_editeur_images.mp4','Éditeur d\'Images — Démo','Java / JavaFX · IntelliJ · H2 Database')">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-              Vidéo démo
+              <span class="fr-only">Vidéo démo</span><span class="en-only">Demo video</span>
             </button>
             <a href="https://github.com/Rinoh16/image_mod" target="_blank" class="proof-btn pb-github">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.59 2 12.25c0 4.53 2.865 8.37 6.839 9.73.5.096.682-.223.682-.495 0-.244-.01-.89-.014-1.748-2.782.618-3.37-1.387-3.37-1.387-.454-1.183-1.11-1.498-1.11-1.498-.908-.638.069-.625.069-.625 1.003.072 1.531 1.056 1.531 1.056.892 1.566 2.341 1.114 2.91.852.09-.663.349-1.114.635-1.37-2.22-.262-4.555-1.14-4.555-5.073 0-1.12.389-2.035 1.029-2.752-.103-.26-.446-1.312.098-2.736 0 0 .84-.276 2.75 1.052A9.303 9.303 0 0 1 12 6.836c.85.004 1.705.117 2.504.343 1.909-1.328 2.747-1.052 2.747-1.052.546 1.424.203 2.475.1 2.736.64.717 1.027 1.632 1.027 2.752 0 3.944-2.338 4.81-4.565 5.066.36.318.678.948.678 1.91 0 1.378-.012 2.489-.012 2.828 0 .275.18.597.688.494C19.137 20.617 22 16.777 22 12.25 22 6.59 17.523 2 12 2Z"/></svg>
@@ -938,7 +967,7 @@ footer p{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);lett
             </a>
             <span class="proof-btn pb-soon">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-              Rapport en cours
+              <span class="fr-only">Rapport en cours</span><span class="en-only">Report pending</span>
             </span>
           </div>
         </div>
@@ -954,12 +983,12 @@ footer p{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);lett
       <div class="proj-inner">
         <div>
           <div class="pc-num">03</div>
-          <div class="pc-title">Analyse de la Maladie d'Alzheimer</div>
+          <div class="pc-title"><span class="fr-only">Analyse de la Maladie d'Alzheimer</span><span class="en-only">Alzheimer's Disease Analysis</span></div>
           <div class="pc-tech">Python · Deep Learning · Machine Learning · Google Colab</div>
-          <div class="pc-desc">Recherche et analyse de données sur Alzheimer — modèles DL et ML sur données volumineuses, prétraitement, entraînement et évaluation de modèles.</div>
+          <div class="pc-desc"><span class="fr-only">Recherche et analyse de données sur Alzheimer — modèles DL et ML sur données volumineuses, prétraitement, entraînement et évaluation de modèles.</span><span class="en-only">Research and analysis of Alzheimer's data — DL and ML models on large datasets, preprocessing, training and model evaluation.</span></div>
           <div class="pc-tags"><span class="pc-tag">Deep Learning</span><span class="pc-tag">Scikit-learn</span><span class="pc-tag">Google Colab</span><span class="pc-tag">EDA</span></div>
           <div class="proof-zone">
-            <span class="proof-label">Preuves</span>
+            <span class="proof-label"><span class="fr-only">Preuves</span><span class="en-only">Proof</span></span>
             <a href="https://github.com/Rinoh16/alzheimer-analyse" target="_blank" class="proof-btn pb-github">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.59 2 12.25c0 4.53 2.865 8.37 6.839 9.73.5.096.682-.223.682-.495 0-.244-.01-.89-.014-1.748-2.782.618-3.37-1.387-3.37-1.387-.454-1.183-1.11-1.498-1.11-1.498-.908-.638.069-.625.069-.625 1.003.072 1.531 1.056 1.531 1.056.892 1.566 2.341 1.114 2.91.852.09-.663.349-1.114.635-1.37-2.22-.262-4.555-1.14-4.555-5.073 0-1.12.389-2.035 1.029-2.752-.103-.26-.446-1.312.098-2.736 0 0 .84-.276 2.75 1.052A9.303 9.303 0 0 1 12 6.836c.85.004 1.705.117 2.504.343 1.909-1.328 2.747-1.052 2.747-1.052.546 1.424.203 2.475.1 2.736.64.717 1.027 1.632 1.027 2.752 0 3.944-2.338 4.81-4.565 5.066.36.318.678.948.678 1.91 0 1.378-.012 2.489-.012 2.828 0 .275.18.597.688.494C19.137 20.617 22 16.777 22 12.25 22 6.59 17.523 2 12 2Z"/></svg>
               GitHub
@@ -978,12 +1007,12 @@ footer p{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);lett
       <div class="proj-inner">
         <div>
           <div class="pc-num">04</div>
-          <div class="pc-title">Base de Données — Gestion de Restaurant</div>
+          <div class="pc-title"><span class="fr-only">Base de Données — Gestion de Restaurant</span><span class="en-only">Database — Restaurant Management</span></div>
           <div class="pc-tech">MySQL · SQL avancé · Modélisation Merise</div>
-          <div class="pc-desc">Conception et implémentation complète d'une BDD restaurant — menus, commandes, stocks, personnel et reporting analytique.</div>
+          <div class="pc-desc"><span class="fr-only">Conception et implémentation complète d'une BDD restaurant — menus, commandes, stocks, personnel et reporting analytique.</span><span class="en-only">Full design and implementation of a restaurant database — menus, orders, stock, staff and analytical reporting.</span></div>
           <div class="pc-tags"><span class="pc-tag">MySQL</span><span class="pc-tag">Merise</span><span class="pc-tag">SQL avancé</span></div>
           <div class="proof-zone">
-            <span class="proof-label">Preuves</span>
+            <span class="proof-label"><span class="fr-only">Preuves</span><span class="en-only">Proof</span></span>
             <a href="https://github.com/Rinoh16/restaurant" target="_blank" class="proof-btn pb-github">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.59 2 12.25c0 4.53 2.865 8.37 6.839 9.73.5.096.682-.223.682-.495 0-.244-.01-.89-.014-1.748-2.782.618-3.37-1.387-3.37-1.387-.454-1.183-1.11-1.498-1.11-1.498-.908-.638.069-.625.069-.625 1.003.072 1.531 1.056 1.531 1.056.892 1.566 2.341 1.114 2.91.852.09-.663.349-1.114.635-1.37-2.22-.262-4.555-1.14-4.555-5.073 0-1.12.389-2.035 1.029-2.752-.103-.26-.446-1.312.098-2.736 0 0 .84-.276 2.75 1.052A9.303 9.303 0 0 1 12 6.836c.85.004 1.705.117 2.504.343 1.909-1.328 2.747-1.052 2.747-1.052.546 1.424.203 2.475.1 2.736.64.717 1.027 1.632 1.027 2.752 0 3.944-2.338 4.81-4.565 5.066.36.318.678.948.678 1.91 0 1.378-.012 2.489-.012 2.828 0 .275.18.597.688.494C19.137 20.617 22 16.777 22 12.25 22 6.59 17.523 2 12 2Z"/></svg>
               GitHub
@@ -1002,15 +1031,15 @@ footer p{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);lett
       <div class="proj-inner">
         <div>
           <div class="pc-num">05</div>
-          <div class="pc-title">Jeu Vidéo Pac-Man</div>
+          <div class="pc-title"><span class="fr-only">Jeu Vidéo Pac-Man</span><span class="en-only">Pac-Man Video Game</span></div>
           <div class="pc-tech">Processing · Java</div>
-          <div class="pc-desc">Jeu Pac-Man fonctionnel — déplacements, collisions, IA des fantômes et système de score.</div>
+          <div class="pc-desc"><span class="fr-only">Jeu Pac-Man fonctionnel — déplacements, collisions, IA des fantômes et système de score.</span><span class="en-only">Functional Pac-Man game — movement, collisions, ghost AI and scoring system.</span></div>
           <div class="pc-tags"><span class="pc-tag">Processing</span><span class="pc-tag">Game Dev</span><span class="pc-tag">Algorithmes</span></div>
           <div class="proof-zone">
-            <span class="proof-label">Preuves</span>
+            <span class="proof-label"><span class="fr-only">Preuves</span><span class="en-only">Proof</span></span>
             <button class="proof-btn pb-video" onclick="openVideo('demo_pacman.mp4','Pac-Man — Démo','Processing · Java · 2025')">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-              Vidéo de jeu
+              <span class="fr-only">Vidéo de jeu</span><span class="en-only">Demo video</span>
             </button>
             <a href="https://github.com/Rinoh16/pacman" target="_blank" class="proof-btn pb-github">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.59 2 12.25c0 4.53 2.865 8.37 6.839 9.73.5.096.682-.223.682-.495 0-.244-.01-.89-.014-1.748-2.782.618-3.37-1.387-3.37-1.387-.454-1.183-1.11-1.498-1.11-1.498-.908-.638.069-.625.069-.625 1.003.072 1.531 1.056 1.531 1.056.892 1.566 2.341 1.114 2.91.852.09-.663.349-1.114.635-1.37-2.22-.262-4.555-1.14-4.555-5.073 0-1.12.389-2.035 1.029-2.752-.103-.26-.446-1.312.098-2.736 0 0 .84-.276 2.75 1.052A9.303 9.303 0 0 1 12 6.836c.85.004 1.705.117 2.504.343 1.909-1.328 2.747-1.052 2.747-1.052.546 1.424.203 2.475.1 2.736.64.717 1.027 1.632 1.027 2.752 0 3.944-2.338 4.81-4.565 5.066.36.318.678.948.678 1.91 0 1.378-.012 2.489-.012 2.828 0 .275.18.597.688.494C19.137 20.617 22 16.777 22 12.25 22 6.59 17.523 2 12 2Z"/></svg>
@@ -1028,15 +1057,15 @@ footer p{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);lett
       <div class="proj-inner">
         <div>
           <div class="pc-num">06</div>
-          <div class="pc-title">Application de Prise de Rendez-vous Médical</div>
+          <div class="pc-title"><span class="fr-only">Application de Prise de Rendez-vous Médical</span><span class="en-only">Medical Appointment Booking App</span></div>
           <div class="pc-tech">PHP · MySQL · HTML / CSS · JavaScript · XAMPP</div>
-          <div class="pc-desc">Site web complet de gestion de rendez-vous médicaux — espace patient, médecin et admin. Base MySQL, authentification et gestion de planning. Développé sous XAMPP.</div>
+          <div class="pc-desc"><span class="fr-only">Site web complet de gestion de rendez-vous médicaux — espace patient, médecin et admin. Base MySQL, authentification et gestion de planning. Développé sous XAMPP.</span><span class="en-only">Full medical appointment management website — patient, doctor and admin areas. MySQL database, authentication and scheduling. Built with XAMPP.</span></div>
           <div class="pc-tags"><span class="pc-tag">PHP</span><span class="pc-tag">MySQL</span><span class="pc-tag">XAMPP</span><span class="pc-tag">Admin</span></div>
           <div class="proof-zone">
-            <span class="proof-label">Preuves</span>
+            <span class="proof-label"><span class="fr-only">Preuves</span><span class="en-only">Proof</span></span>
             <button class="proof-btn pb-video" onclick="openVideo('demo_rdv_medical.mp4','Rendez-vous Médical — Démo','Application PHP/MySQL · XAMPP · Stage L1 2024')">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-              Vidéo démo
+              <span class="fr-only">Vidéo démo</span><span class="en-only">Demo video</span>
             </button>
             <a href="https://github.com/Rinoh16/website_projet" target="_blank" class="proof-btn pb-github">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.59 2 12.25c0 4.53 2.865 8.37 6.839 9.73.5.096.682-.223.682-.495 0-.244-.01-.89-.014-1.748-2.782.618-3.37-1.387-3.37-1.387-.454-1.183-1.11-1.498-1.11-1.498-.908-.638.069-.625.069-.625 1.003.072 1.531 1.056 1.531 1.056.892 1.566 2.341 1.114 2.91.852.09-.663.349-1.114.635-1.37-2.22-.262-4.555-1.14-4.555-5.073 0-1.12.389-2.035 1.029-2.752-.103-.26-.446-1.312.098-2.736 0 0 .84-.276 2.75 1.052A9.303 9.303 0 0 1 12 6.836c.85.004 1.705.117 2.504.343 1.909-1.328 2.747-1.052 2.747-1.052.546 1.424.203 2.475.1 2.736.64.717 1.027 1.632 1.027 2.752 0 3.944-2.338 4.81-4.565 5.066.36.318.678.948.678 1.91 0 1.378-.012 2.489-.012 2.828 0 .275.18.597.688.494C19.137 20.617 22 16.777 22 12.25 22 6.59 17.523 2 12 2Z"/></svg>
@@ -1059,9 +1088,10 @@ footer p{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);lett
 <section id="cv">
 <div class="sw">
   <div class="fade-in">
-    <span class="eyebrow">04 / Curriculum Vitae</span>
-    <h2 class="sec-title">Mon CV</h2>
-    <p class="sec-sub">Cliquez sur l'aperçu pour l'agrandir ou téléchargez la version PDF.</p>
+    <span class="eyebrow"><span class="fr-only">04 / Curriculum Vitae</span><span class="en-only">04 / Resume</span></span>
+    <h2 class="sec-title"><span class="fr-only">Mon CV</span><span class="en-only">My Resume</span></h2>
+    <p class="sec-sub fr-only">Cliquez sur l'aperçu pour l'agrandir ou téléchargez la version PDF.</p>
+    <p class="sec-sub en-only">Click the preview to enlarge or download the PDF version.</p>
   </div>
   <div class="cv-wrap fade-in">
     <div class="cv-showcase">
@@ -1070,26 +1100,28 @@ footer p{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);lett
         <div class="cv-img-overlay">
           <div class="cv-zoom-hint">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/><path d="M11 8v6M8 11h6"/></svg>
-            Cliquer pour agrandir
+            <span class="fr-only">Cliquer pour agrandir</span><span class="en-only">Click to enlarge</span>
           </div>
         </div>
       </div>
     </div>
     <div class="cv-side">
       <div class="cv-card">
-        <div class="cv-card-title">Format PDF</div>
-        <div class="cv-card-desc">Version complète et mise en page professionnelle, prête à être envoyée à des recruteurs.</div>
+        <div class="cv-card-title"><span class="fr-only">Format PDF</span><span class="en-only">PDF Format</span></div>
+        <div class="cv-card-desc fr-only">Version complète et mise en page professionnelle, prête à être envoyée à des recruteurs.</div>
+        <div class="cv-card-desc en-only">Full version with professional layout, ready to send to recruiters.</div>
         <a href="cv2.pdf" download class="btn-dl">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          Télécharger le CV PDF
+          <span class="fr-only">Télécharger le CV PDF</span><span class="en-only">Download Resume PDF</span>
         </a>
       </div>
       <div class="cv-card">
-        <div class="cv-card-title">Disponibilité</div>
-        <div class="cv-card-desc">Disponible pour un stage ou une alternance en Data Science, ML ou Développement.</div>
+        <div class="cv-card-title"><span class="fr-only">Disponibilité</span><span class="en-only">Availability</span></div>
+        <div class="cv-card-desc fr-only">Disponible pour un stage ou une alternance en Data Science, ML ou Développement.</div>
+        <div class="cv-card-desc en-only">Available for an internship or work-study in Data Science, ML or Development.</div>
         <a href="#contact" class="btn btn-ghost" style="font-size:.8rem;padding:.65rem 1.2rem;display:inline-flex;align-items:center;gap:.45rem;">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m22 2-7 20-4-9-9-4Z"/></svg>
-          Me contacter
+          <span class="fr-only">Me contacter</span><span class="en-only">Contact me</span>
         </a>
       </div>
 
@@ -1104,76 +1136,85 @@ footer p{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);lett
 <section id="parcours">
 <div class="sw">
   <div class="fade-in">
-    <span class="eyebrow">05 / Parcours</span>
-    <h2 class="sec-title">Formations &amp; Expériences</h2>
-    <p class="sec-sub">Un parcours pluriculturel — Madagascar, Maroc, France — qui forge adaptabilité et curiosité.</p>
+    <span class="eyebrow"><span class="fr-only">05 / Parcours</span><span class="en-only">05 / Journey</span></span>
+    <h2 class="sec-title"><span class="fr-only">Formations &amp; Expériences</span><span class="en-only">Education &amp; Experience</span></h2>
+    <p class="sec-sub fr-only">Un parcours pluriculturel — Madagascar, Maroc, France — qui forge adaptabilité et curiosité.</p>
+    <p class="sec-sub en-only">A multicultural path — Madagascar, Morocco, France — that builds adaptability and curiosity.</p>
   </div>
   <div class="tl-grid fade-in">
     <div class="tl-col">
-      <h3><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>Formation</h3>
+      <h3><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg><span class="fr-only">Formation</span><span class="en-only">Education</span></h3>
       <div class="tl">
         <div class="tl-item">
           <div class="tl-dot"></div>
-          <div class="tl-date">2025–2026 · EN COURS</div>
-          <div class="tl-title">Licence 2 Informatique</div>
+          <div class="tl-date"><span class="fr-only">2025–2026 · EN COURS</span><span class="en-only">2025–2026 · ONGOING</span></div>
+          <div class="tl-title"><span class="fr-only">Licence 2 Informatique</span><span class="en-only">BSc Year 2 — Computer Science</span></div>
           <div class="tl-place">Université de Limoges — Faculté des Sciences et Techniques</div>
-          <div class="tl-desc">Algorithmique avancée, structures de données, systèmes, réseaux, programmation objet.</div>
+          <div class="tl-desc"><span class="fr-only">Algorithmique avancée, structures de données, systèmes, réseaux, programmation objet.</span><span class="en-only">Advanced algorithms, data structures, systems, networks, object-oriented programming.</span></div>
         </div>
         <div class="tl-item">
           <div class="tl-dot"></div>
           <div class="tl-date">2024–2025</div>
-          <div class="tl-title">DUT — Informatique Décisionnelle &amp; Apprentissage Automatique (L2 IDAA)</div>
+          <div class="tl-title"><span class="fr-only">DUT — Informatique Décisionnelle &amp; Apprentissage Automatique (L2 IDAA)</span><span class="en-only">HND — Decisional Computing &amp; Machine Learning (L2 IDAA)</span></div>
           <div class="tl-place">Université Mohammed Premier, ESTO — Oujda, Maroc</div>
-          <div class="tl-desc">Data Science, ML, DL, bases de données, statistiques et développement web.</div>
-          <div class="tl-badge">DUT — Mention Très Bien</div>
+          <div class="tl-desc"><span class="fr-only">Data Science, ML, DL, bases de données, statistiques et développement web.</span><span class="en-only">Data Science, ML, DL, databases, statistics and web development.</span></div>
+          <div class="tl-badge"><span class="fr-only">DUT — Mention Très Bien</span><span class="en-only">DUT — With Distinction</span></div>
         </div>
         <div class="tl-item">
           <div class="tl-dot"></div>
           <div class="tl-date">2023–2024</div>
-          <div class="tl-title">L1 IDAA</div>
+          <div class="tl-title"><span class="fr-only">L1 IDAA</span><span class="en-only">L1 IDAA (Decisional CS &amp; ML)</span></div>
           <div class="tl-place">Université Mohammed Premier, ESTO — Oujda, Maroc</div>
-          <div class="tl-desc">Première année du cursus Informatique Décisionnelle et Apprentissage Automatique.</div>
-          <div class="tl-badge">Bourse d'excellence</div>
+          <div class="tl-desc"><span class="fr-only">Première année du cursus Informatique Décisionnelle et Apprentissage Automatique.</span><span class="en-only">First year of the Decisional Computer Science and Machine Learning programme.</span></div>
+          <div class="tl-badge"><span class="fr-only">Bourse d'excellence</span><span class="en-only">Excellence scholarship</span></div>
         </div>
         <div class="tl-item">
           <div class="tl-dot"></div>
           <div class="tl-date">2022–2023</div>
-          <div class="tl-title">L1 SIM — Sciences et Ingénierie des Matériaux</div>
+          <div class="tl-title"><span class="fr-only">L1 SIM — Sciences et Ingénierie des Matériaux</span><span class="en-only">L1 — Materials Science &amp; Engineering</span></div>
           <div class="tl-place">École Supérieure Polytechnique d'Antananarivo — Madagascar</div>
-          <div class="tl-desc">Première année d'école d'ingénieurs, orientation vers l'informatique.</div>
+          <div class="tl-desc"><span class="fr-only">Première année d'école d'ingénieurs, orientation vers l'informatique.</span><span class="en-only">First year of engineering school, oriented towards computer science.</span></div>
         </div>
         <div class="tl-item">
           <div class="tl-dot"></div>
           <div class="tl-date">2021–2022</div>
-          <div class="tl-title">Baccalauréat Série Scientifique</div>
+          <div class="tl-title"><span class="fr-only">Baccalauréat Série Scientifique</span><span class="en-only">Scientific Baccalaureate</span></div>
           <div class="tl-place">Lycée Jacques RABEMANANJARA — Madagascar</div>
-          <div class="tl-badge">Mention Bien</div>
+          <div class="tl-badge"><span class="fr-only">Mention Bien</span><span class="en-only">Honours</span></div>
         </div>
       </div>
     </div>
     <div class="tl-col">
-      <h3><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>Expériences</h3>
+      <h3><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg><span class="fr-only">Expériences</span><span class="en-only">Experience</span></h3>
       <div class="tl">
         <div class="tl-item">
           <div class="tl-dot"></div>
-          <div class="tl-date">08 AVRIL – 08 JUIN 2025 · 2 MOIS</div>
-          <div class="tl-title">Stagiaire Développeur — Informatique Décisionnelle</div>
+          <div class="tl-date"><span class="fr-only">2025–2026 · EN COURS</span><span class="en-only">2025–2026 · ONGOING</span></div>
+          <div class="tl-title"><span class="fr-only">Animateur Préscolaire</span><span class="en-only">Preschool Activity Leader</span></div>
+          <div class="tl-place"><span class="fr-only">Mairie de Limoges — France</span><span class="en-only">City of Limoges — France</span></div>
+          <div class="tl-desc"><span class="fr-only">Agent municipal en charge de l'encadrement d'enfants en milieu préscolaire. Surveillance, animation d'activités ludiques et pédagogiques, accompagnement à la découverte de soi et du monde, développement de la créativité et de la socialisation.</span><span class="en-only">Municipal agent responsible for supervising and leading preschool-age children. Childcare, educational and recreational activities, supporting children's self-discovery, creativity and social development.</span></div>
+          <div class="tl-badge"><span class="fr-only">Poste actuel</span><span class="en-only">Current position</span></div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-date"><span class="fr-only">08 AVRIL – 08 JUIN 2025 · 2 MOIS</span><span class="en-only">APR 08 – JUN 08 2025 · 2 MONTHS</span></div>
+          <div class="tl-title"><span class="fr-only">Stagiaire Développeur — Informatique Décisionnelle</span><span class="en-only">Developer Intern — Decisional Computing</span></div>
           <div class="tl-place">SupMTI, Oujda — Maroc</div>
-          <div class="tl-desc">Développement d'une application web Django de prédiction d'insertion professionnelle. Gestion de base de données, intégration ML, interface admin.</div>
+          <div class="tl-desc"><span class="fr-only">Développement d'une application web Django de prédiction d'insertion professionnelle. Gestion de base de données, intégration ML, interface admin.</span><span class="en-only">Built a Django web application for predicting professional integration. Database management, ML integration, admin interface.</span></div>
         </div>
         <div class="tl-item">
           <div class="tl-dot"></div>
-          <div class="tl-date">08 JUILLET – 08 AOÛT 2024 · 1 MOIS</div>
-          <div class="tl-title">Stagiaire Développeur Web</div>
+          <div class="tl-date"><span class="fr-only">08 JUILLET – 08 AOÛT 2024 · 1 MOIS</span><span class="en-only">JUL 08 – AUG 08 2024 · 1 MONTH</span></div>
+          <div class="tl-title"><span class="fr-only">Stagiaire Développeur Web</span><span class="en-only">Web Developer Intern</span></div>
           <div class="tl-place">Oujda — Maroc</div>
-          <div class="tl-desc">Développement d'un site de prise de rendez-vous médicaux en PHP/MySQL. Authentification, administration, gestion de planning.</div>
+          <div class="tl-desc"><span class="fr-only">Développement d'un site de prise de rendez-vous médicaux en PHP/MySQL. Authentification, administration, gestion de planning.</span><span class="en-only">Built a medical appointment booking website in PHP/MySQL. Authentication, administration, scheduling management.</span></div>
         </div>
         <div class="tl-item">
           <div class="tl-dot"></div>
-          <div class="tl-date">AOÛT – SEPTEMBRE 2023</div>
-          <div class="tl-title">Bénévole — Formateur Informatique</div>
+          <div class="tl-date"><span class="fr-only">AOÛT – SEPTEMBRE 2023</span><span class="en-only">AUG – SEP 2023</span></div>
+          <div class="tl-title"><span class="fr-only">Bénévole — Formateur Informatique</span><span class="en-only">Volunteer — IT Trainer</span></div>
           <div class="tl-place">ONG Fitiavana — Madagascar</div>
-          <div class="tl-desc">Animation d'ateliers pédagogiques pour les enfants. Initiation aux outils numériques (Canva, MOOC, Project Gutenberg) et ateliers créatifs.</div>
+          <div class="tl-desc"><span class="fr-only">Animation d'ateliers pédagogiques pour les enfants. Initiation aux outils numériques (Canva, MOOC, Project Gutenberg) et ateliers créatifs.</span><span class="en-only">Led educational workshops for children. Introduction to digital tools (Canva, MOOC, Project Gutenberg) and creative activities.</span></div>
         </div>
       </div>
     </div>
@@ -1186,11 +1227,12 @@ footer p{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);lett
 <!-- ══ CONTACT ══ -->
 <section id="contact">
 <div class="sw">
-  <div class="fade-in"><span class="eyebrow">06 / Contact</span></div>
+  <div class="fade-in"><span class="eyebrow"><span class="fr-only">06 / Contact</span><span class="en-only">06 / Contact</span></span></div>
   <div class="contact-wrap fade-in">
     <div>
-      <div class="contact-title">Travaillons<br><span style="color:transparent;-webkit-text-stroke:1px var(--muted2);">ensemble.</span></div>
-      <p class="contact-p">Disponible pour des stages, alternances ou missions en Data Science, Machine Learning et développement. Ouvert à toute opportunité en France ou à l'international.</p>
+      <div class="contact-title"><span class="fr-only">Travaillons<br><span style="color:transparent;-webkit-text-stroke:1px var(--muted2);">ensemble.</span></span><span class="en-only">Let's work<br><span style="color:transparent;-webkit-text-stroke:1px var(--muted2);">together.</span></span></div>
+      <p class="contact-p fr-only">Disponible pour des stages, alternances ou missions en Data Science, Machine Learning et développement. Ouvert à toute opportunité en France ou à l'international.</p>
+      <p class="contact-p en-only">Available for internships, work-study or missions in Data Science, Machine Learning and development. Open to any opportunity in France or internationally.</p>
       <div class="social-row">
         <a href="mailto:rajaotianar@gmail.com" class="social-link">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>rajaotianar@gmail.com
@@ -1216,20 +1258,34 @@ footer p{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);lett
     <div>
       <form class="cform" id="contactForm" onsubmit="sendMail(event)">
         <div class="frow">
-          <div class="fg"><label class="flabel" for="fname">Prénom</label><input class="finput" id="fname" name="from_first_name" placeholder="Jean" required></div>
-          <div class="fg"><label class="flabel" for="lname">Nom</label><input class="finput" id="lname" name="from_last_name" placeholder="Dupont"></div>
+          <div class="fg">
+            <label class="flabel" for="fname"><span class="fr-only">Prénom</span><span class="en-only">First name</span></label>
+            <input class="finput" id="fname" name="from_first_name" placeholder="Jean" required>
+          </div>
+          <div class="fg">
+            <label class="flabel" for="lname"><span class="fr-only">Nom</span><span class="en-only">Last name</span></label>
+            <input class="finput" id="lname" name="from_last_name" placeholder="Dupont">
+          </div>
         </div>
-        <div class="fg"><label class="flabel" for="email">Email</label><input class="finput" id="email" name="reply_to" type="email" placeholder="jean@exemple.fr" required></div>
-        <div class="fg"><label class="flabel" for="subject">Sujet</label><input class="finput" id="subject" name="subject" placeholder="Votre objet..." required></div>
+        <div class="fg">
+          <label class="flabel" for="email">Email</label>
+          <input class="finput" id="email" name="reply_to" type="email" placeholder="jean@exemple.fr" required>
+        </div>
+        <div class="fg">
+          <label class="flabel" for="subject"><span class="fr-only">Sujet</span><span class="en-only">Subject</span></label>
+          <input class="finput" id="subject" name="subject" placeholder="..." required>
+        </div>
         <input type="hidden" name="to_name" value="RAJAOTIANA Rinoh Dominique">
         <input type="hidden" name="to_email" value="rajaotianar@gmail.com">
-        <div class="fg"><label class="flabel" for="message">Message</label><textarea class="ftextarea" id="message" name="message" placeholder="Bonjour Rinoh..." required></textarea></div>
+        <div class="fg">
+          <label class="flabel" for="message">Message</label>
+          <textarea class="ftextarea" id="message" name="message" placeholder="Bonjour Rinoh..." required></textarea>
+        </div>
         <button type="submit" class="btn-send" id="sendBtn">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
-          Envoyer le message
+          <span class="fr-only">Envoyer le message</span><span class="en-only">Send message</span>
         </button>
         <div class="f-success" id="formSuccess"></div>
-
       </form>
     </div>
   </div>
@@ -1237,7 +1293,7 @@ footer p{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);lett
 </section>
 
 <footer style="justify-content:center;">
-  <p>© 2026 RAJAOTIANA Rinoh Dominique — Tous droits réservés</p>
+  <p>© 2025–2026 RAJAOTIANA Rinoh Dominique — <a href="https://rinoh16.github.io" style="color:var(--accent);text-decoration:none;">rinoh16.github.io</a></p>
 </footer>
 
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
@@ -1255,22 +1311,78 @@ function toggleTheme(){
   if(t){document.documentElement.dataset.theme=t;document.getElementById('themeLbl').textContent=t==='dark'?'Clair':'Sombre';}
 })();
 
+/* ══ LANGUE FR / EN ══ */
+function toggleLang(){
+  const isEn = document.documentElement.dataset.lang === 'en';
+  const newLang = isEn ? 'fr' : 'en';
+  document.documentElement.dataset.lang = newLang;
+  const btn = document.getElementById('langBtn');
+  document.getElementById('langLbl').textContent = isEn ? 'EN' : 'FR';
+  btn.classList.toggle('en', !isEn);
+  localStorage.setItem('lang', newLang);
+  // Met à jour le placeholder du textarea selon la langue
+  const ta = document.getElementById('message');
+  if(ta) ta.placeholder = newLang === 'en' ? 'Hello Rinoh...' : 'Bonjour Rinoh...';
+  const sub = document.getElementById('subject');
+  if(sub) sub.placeholder = newLang === 'en' ? 'Your subject...' : '...';
+  // Met à jour le html lang
+  document.documentElement.lang = newLang;
+  // Relance le terminal JSON dans la nouvelle langue
+  runTerminal();
+}
+(function(){
+  const l = localStorage.getItem('lang') || 'fr';
+  document.documentElement.dataset.lang = l;
+  document.documentElement.lang = l;
+  if(l === 'en'){
+    document.getElementById('langLbl').textContent = 'FR';
+    document.getElementById('langBtn').classList.add('en');
+    const ta = document.getElementById('message');
+    if(ta) ta.placeholder = 'Hello Rinoh...';
+    const sub = document.getElementById('subject');
+    if(sub) sub.placeholder = 'Your subject...';
+  }
+})();
+
 /* ══ PARTICLES ══ */
 (function(){
   const c=document.getElementById('cvs'),ctx=c.getContext('2d');
+  const isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent) || window.innerWidth < 768;
+  // Moins de particules sur mobile, connexions désactivées
+  const COUNT = isMobile ? 25 : 60;
+  const CONNECT_DIST = isMobile ? 0 : 100; // pas de lignes sur mobile = gain majeur
+  const SPEED = isMobile ? 0.2 : 0.3;
+
   function resize(){c.width=innerWidth;c.height=innerHeight;}
-  resize();addEventListener('resize',resize);
-  const pts=Array.from({length:60},()=>({x:Math.random()*innerWidth,y:Math.random()*innerHeight,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,r:Math.random()*1.2+.3}));
+  resize();addEventListener('resize',()=>{ resize(); });
+
+  const pts=Array.from({length:COUNT},()=>({
+    x:Math.random()*innerWidth,y:Math.random()*innerHeight,
+    vx:(Math.random()-.5)*SPEED,vy:(Math.random()-.5)*SPEED,
+    r:Math.random()*1.2+.3
+  }));
+
   let cachedAccent='#6ee7b7';let lastTheme='';
   function getAccent(){
     const t=document.documentElement.dataset.theme;
     if(t!==lastTheme){lastTheme=t;cachedAccent=getComputedStyle(document.documentElement).getPropertyValue('--accent').trim()||'#6ee7b7';}
     return cachedAccent;
   }
-  function draw(){
+
+  // Sur mobile : limite à ~30fps pour économiser la batterie
+  let lastTime=0;
+  const FPS_LIMIT = isMobile ? 30 : 60;
+  const FRAME_MIN = 1000/FPS_LIMIT;
+
+  function draw(ts){
+    requestAnimationFrame(draw);
+    if(ts - lastTime < FRAME_MIN) return;
+    lastTime = ts;
+
     ctx.clearRect(0,0,c.width,c.height);
     const a=getAccent(),isDark=document.documentElement.dataset.theme!=='light';
     const op=isDark?.22:.12;
+
     pts.forEach(p=>{
       p.x+=p.vx;p.y+=p.vy;
       if(p.x<0||p.x>c.width)p.vx*=-1;
@@ -1278,17 +1390,20 @@ function toggleTheme(){
       ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
       ctx.fillStyle=a;ctx.globalAlpha=op;ctx.fill();ctx.globalAlpha=1;
     });
-    pts.forEach((a2,i)=>pts.slice(i+1).forEach(b=>{
-      const d=Math.hypot(a2.x-b.x,a2.y-b.y);
-      if(d<100){
-        ctx.beginPath();ctx.moveTo(a2.x,a2.y);ctx.lineTo(b.x,b.y);
-        ctx.strokeStyle=a;ctx.globalAlpha=op*(1-d/100)*.6;
-        ctx.lineWidth=.5;ctx.stroke();ctx.globalAlpha=1;
-      }
-    }));
-    requestAnimationFrame(draw);
+
+    // Connexions seulement sur desktop
+    if(CONNECT_DIST > 0){
+      pts.forEach((a2,i)=>pts.slice(i+1).forEach(b=>{
+        const d=Math.hypot(a2.x-b.x,a2.y-b.y);
+        if(d<CONNECT_DIST){
+          ctx.beginPath();ctx.moveTo(a2.x,a2.y);ctx.lineTo(b.x,b.y);
+          ctx.strokeStyle=a;ctx.globalAlpha=op*(1-d/CONNECT_DIST)*.6;
+          ctx.lineWidth=.5;ctx.stroke();ctx.globalAlpha=1;
+        }
+      }));
+    }
   }
-  draw();
+  requestAnimationFrame(draw);
 })();
 
 /* ══ CARD MOUSE GLOW ══ */
@@ -1333,7 +1448,7 @@ addEventListener('scroll',()=>{
 });
 
 /* ══ TERMINAL ══ */
-const tlines=[
+const tlines_fr=[
   '<span class="tc"># ~/rinoh_profile.json</span>','{',
   '&nbsp;&nbsp;<span class="tk">"nom"</span>: <span class="ts">"RAJAOTIANA Rinoh Dominique"</span>,',
   '&nbsp;&nbsp;<span class="tk">"niveau"</span>: <span class="ts">"L2 Informatique — Univ. Limoges"</span>,',
@@ -1346,8 +1461,31 @@ const tlines=[
   '&nbsp;&nbsp;<span class="tk">"dispo_stage"</span>: <span class="tv">true</span>',
   '} <span class="t-cur"></span>',
 ];
-const tb=document.getElementById('termBody');
-if(tb){let i=0;function al(){if(i<tlines.length){const d=document.createElement('div');d.innerHTML=tlines[i++];tb.appendChild(d);setTimeout(al,150);}}setTimeout(al,800);}
+const tlines_en=[
+  '<span class="tc"># ~/rinoh_profile.json</span>','{',
+  '&nbsp;&nbsp;<span class="tk">"name"</span>: <span class="ts">"RAJAOTIANA Rinoh Dominique"</span>,',
+  '&nbsp;&nbsp;<span class="tk">"level"</span>: <span class="ts">"CS L2 — Univ. Limoges"</span>,',
+  '&nbsp;&nbsp;<span class="tk">"focus"</span>: <span class="ts">"Data Science & AI"</span>,',
+  '&nbsp;&nbsp;<span class="tk">"passions"</span>: [<span class="ts">"AI"</span>,<span class="ts">"Chess"</span>,<span class="ts">"Gaming"</span>,<span class="ts">"Sport"</span>],',
+  '&nbsp;&nbsp;<span class="tk">"projects"</span>: <span class="tn">6</span>,',
+  '&nbsp;&nbsp;<span class="tk">"internships"</span>: <span class="tn">2</span>,',
+  '&nbsp;&nbsp;<span class="tk">"dut_grade"</span>: <span class="ts">"With Distinction"</span>,',
+  '&nbsp;&nbsp;<span class="tk">"countries"</span>: [<span class="ts">"Madagascar"</span>,<span class="ts">"Morocco"</span>,<span class="ts">"France"</span>],',
+  '&nbsp;&nbsp;<span class="tk">"available"</span>: <span class="tv">true</span>',
+  '} <span class="t-cur"></span>',
+];
+
+function runTerminal(){
+  const tb=document.getElementById('termBody');
+  if(!tb) return;
+  tb.innerHTML='';
+  const isEn = document.documentElement.dataset.lang==='en';
+  const lines = isEn ? tlines_en : tlines_fr;
+  let i=0;
+  function al(){if(i<lines.length){const d=document.createElement('div');d.innerHTML=lines[i++];tb.appendChild(d);setTimeout(al,150);}}
+  setTimeout(al,300);
+}
+runTerminal();
 
 /* ══ PROJECT FILTER ══ */
 document.querySelectorAll('.fbtn').forEach(btn=>{
@@ -1409,13 +1547,15 @@ function sendMail(e){
   const sub=document.getElementById('subject').value.trim();
   const msg=document.getElementById('message').value.trim();
 
+  const isEn = document.documentElement.dataset.lang === 'en';
+
   if(!fn||!em||!sub||!msg){
-    alert('Merci de remplir les champs obligatoires.');
+    alert(isEn ? 'Please fill in all required fields.' : 'Merci de remplir les champs obligatoires.');
     return;
   }
 
   if(typeof emailjs === 'undefined'){
-    alert("EmailJS non chargé. Vérifiez votre connexion internet.");
+    alert(isEn ? "EmailJS not loaded. Check your internet connection." : "EmailJS non chargé. Vérifiez votre connexion internet.");
     return;
   }
 
@@ -1429,7 +1569,7 @@ function sendMail(e){
   }
 
   btn.disabled=true;
-  btn.innerHTML='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg> Envoi en cours…';
+  btn.innerHTML='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg> '+(isEn?'Sending…':'Envoi en cours…');
   success.style.display='none';
 
   const templateParams = {
@@ -1444,18 +1584,18 @@ function sendMail(e){
 
   emailjs.send(EMAILJS_CONFIG.serviceId, EMAILJS_CONFIG.templateId, templateParams)
     .then(function() {
-      success.textContent = 'Message envoyé avec succès !';
+      success.textContent = isEn ? 'Message sent successfully!' : 'Message envoyé avec succès !';
       success.style.cssText = 'display:block;color:#4ade80;background:rgba(74,222,128,.08);border:1px solid rgba(74,222,128,.2);border-radius:10px;padding:1rem;text-align:center;font-weight:700;margin-top:.5rem;';
       form.reset();
     })
     .catch(function(error) {
       console.error('EmailJS error:', JSON.stringify(error));
-      success.textContent = 'Erreur : ' + (error.text || error.message || JSON.stringify(error));
+      success.textContent = (isEn?'Error: ':'Erreur : ') + (error.text || error.message || JSON.stringify(error));
       success.style.cssText = 'display:block;color:#f87171;background:rgba(248,113,113,.08);border:1px solid rgba(248,113,113,.2);border-radius:10px;padding:1rem;text-align:center;font-weight:600;font-size:.82rem;margin-top:.5rem;';
     })
     .finally(function() {
       btn.disabled = false;
-      btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg> Envoyer le message';
+      btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg> '+(isEn?'Send message':'Envoyer le message');
     });
 }
 
