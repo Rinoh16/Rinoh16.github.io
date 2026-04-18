@@ -3,7 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rinoh D. RAJAOTIANA — Portfolio Data Science</title>
+<title>Rinoh D. RAJAOTIANA — Portfolio Data Science & ML</title>
+<meta name="description" content="Portfolio de Rinoh Dominique RAJAOTIANA — Étudiant L2 Informatique à l'Université de Limoges, spécialisé en Data Science, Machine Learning et développement. Disponible pour stage et alternance 2025–2026.">
+<meta name="author" content="RAJAOTIANA Rinoh Dominique">
+<meta property="og:title" content="Rinoh D. RAJAOTIANA — Data Science & ML">
+<meta property="og:description" content="Portfolio Data Science — Étudiant L2 Informatique, Université de Limoges. Python, ML, Django, SQL.">
+<meta property="og:type" content="website">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 /* ══ THEMES ══ */
@@ -37,6 +42,14 @@ img{max-width:100%;}
 ::-webkit-scrollbar-track{background:var(--bg);}
 ::-webkit-scrollbar-thumb{background:var(--accent);}
 
+/* ══ SCROLL PROGRESS ══ */
+#scrollProgress{
+  position:fixed;top:0;left:0;height:2px;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  z-index:400;width:0%;transition:width .1s linear;
+  pointer-events:none;
+}
+
 /* ══ NAV ══ */
 nav{
   position:fixed;top:0;left:0;right:0;z-index:300;
@@ -52,6 +65,8 @@ nav{
 .nav-links{display:flex;gap:2.5rem;list-style:none;}
 .nav-links a{font-size:.77rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted2);transition:color .2s;}
 .nav-links a:hover{color:var(--fg);}
+.nav-links a.active{color:var(--fg);}
+.nav-links a.active::after{content:'';display:block;width:100%;height:1.5px;background:var(--accent);margin-top:2px;border-radius:2px;}
 .nav-right{display:flex;align-items:center;gap:1rem;}
 
 /* theme toggle */
@@ -172,6 +187,7 @@ nav{
   border:2px solid var(--border2);
   box-shadow:0 0 40px var(--glow),0 0 80px var(--glow2);
   transition:box-shadow .4s;
+  background:var(--bg3);
 }
 .photo-center:hover{box-shadow:0 0 60px var(--glow),0 0 120px var(--glow2);}
 .photo-center img{width:100%;height:100%;object-fit:cover;object-position:center top;}
@@ -253,9 +269,10 @@ nav{
 .proj-card{
   background:var(--card);border:1px solid var(--border);
   border-radius:18px;padding:1.8rem;
-  transition:border-color .3s,transform .3s,box-shadow .3s;
+  transition:border-color .3s,transform .3s,box-shadow .3s,opacity .35s,scale .35s;
   position:relative;overflow:hidden;
 }
+.proj-card.hidden{opacity:0;scale:.97;pointer-events:none;height:0;padding:0;border:0;margin:0;overflow:hidden;}
 .proj-card::before{content:'';position:absolute;inset:0;opacity:0;background:radial-gradient(600px at var(--mx,50%) var(--my,50%),rgba(110,231,183,.04),transparent 70%);transition:opacity .3s;pointer-events:none;}
 .proj-card:hover::before{opacity:1;}
 .proj-card:hover{border-color:rgba(110,231,183,.28);transform:translateY(-3px);box-shadow:0 12px 32px var(--shadow);}
@@ -344,6 +361,19 @@ nav{
 .btn-send{background:var(--accent);color:var(--bg);padding:.8rem 1.4rem;border-radius:9px;font-size:.86rem;font-weight:700;letter-spacing:.04em;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.45rem;transition:.25s;margin-top:.3rem;border:none;}
 .btn-send:hover{filter:brightness(1.1);transform:translateY(-1px);box-shadow:0 8px 22px var(--glow);}
 .f-success{display:none;text-align:center;padding:1.2rem;background:rgba(74,222,128,.06);border:1px solid rgba(74,222,128,.18);border-radius:10px;color:#4ade80;font-weight:700;font-size:.85rem;}
+
+/* ══ BACK TO TOP ══ */
+#backTop{
+  position:fixed;bottom:2rem;right:2rem;
+  width:40px;height:40px;border-radius:50%;
+  background:var(--bg3);border:1px solid var(--border2);
+  color:var(--fg);cursor:pointer;z-index:200;
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;transform:translateY(12px);
+  transition:all .3s;pointer-events:none;
+}
+#backTop.visible{opacity:1;transform:none;pointer-events:auto;}
+#backTop:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px);}
 
 /* ══ FOOTER ══ */
 footer{border-top:1px solid var(--border);padding:1.4rem 3.5rem;display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1;}
@@ -565,6 +595,12 @@ footer p{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);lett
 </style>
 </head>
 <body>
+
+<div id="scrollProgress"></div>
+
+<button id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Retour en haut">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 15l-6-6-6 6"/></svg>
+</button>
 
 <canvas id="cvs"></canvas>
 
@@ -1180,14 +1216,14 @@ footer p{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);lett
     <div>
       <form class="cform" id="contactForm" onsubmit="sendMail(event)">
         <div class="frow">
-          <div class="fg"><label class="flabel">Prénom</label><input class="finput" id="fname" name="from_first_name" placeholder="Jean" required></div>
-          <div class="fg"><label class="flabel">Nom</label><input class="finput" id="lname" name="from_last_name" placeholder="Dupont"></div>
+          <div class="fg"><label class="flabel" for="fname">Prénom</label><input class="finput" id="fname" name="from_first_name" placeholder="Jean" required></div>
+          <div class="fg"><label class="flabel" for="lname">Nom</label><input class="finput" id="lname" name="from_last_name" placeholder="Dupont"></div>
         </div>
-        <div class="fg"><label class="flabel">Email</label><input class="finput" id="email" name="reply_to" type="email" placeholder="jean@exemple.fr" required></div>
-        <div class="fg"><label class="flabel">Sujet</label><input class="finput" id="subject" name="subject" placeholder="Votre objet..." required></div>
+        <div class="fg"><label class="flabel" for="email">Email</label><input class="finput" id="email" name="reply_to" type="email" placeholder="jean@exemple.fr" required></div>
+        <div class="fg"><label class="flabel" for="subject">Sujet</label><input class="finput" id="subject" name="subject" placeholder="Votre objet..." required></div>
         <input type="hidden" name="to_name" value="RAJAOTIANA Rinoh Dominique">
         <input type="hidden" name="to_email" value="rajaotianar@gmail.com">
-        <div class="fg"><label class="flabel">Message</label><textarea class="ftextarea" id="message" name="message" placeholder="Bonjour Rinoh..." required></textarea></div>
+        <div class="fg"><label class="flabel" for="message">Message</label><textarea class="ftextarea" id="message" name="message" placeholder="Bonjour Rinoh..." required></textarea></div>
         <button type="submit" class="btn-send" id="sendBtn">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
           Envoyer le message
@@ -1225,7 +1261,12 @@ function toggleTheme(){
   function resize(){c.width=innerWidth;c.height=innerHeight;}
   resize();addEventListener('resize',resize);
   const pts=Array.from({length:60},()=>({x:Math.random()*innerWidth,y:Math.random()*innerHeight,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,r:Math.random()*1.2+.3}));
-  function getAccent(){return getComputedStyle(document.documentElement).getPropertyValue('--accent').trim()||'#6ee7b7';}
+  let cachedAccent='#6ee7b7';let lastTheme='';
+  function getAccent(){
+    const t=document.documentElement.dataset.theme;
+    if(t!==lastTheme){lastTheme=t;cachedAccent=getComputedStyle(document.documentElement).getPropertyValue('--accent').trim()||'#6ee7b7';}
+    return cachedAccent;
+  }
   function draw(){
     ctx.clearRect(0,0,c.width,c.height);
     const a=getAccent(),isDark=document.documentElement.dataset.theme!=='light';
@@ -1264,9 +1305,31 @@ function toggleMenu(){
   document.getElementById('mobileNav').classList.toggle('open');
   document.querySelector('.menu-btn').classList.toggle('open');
 }
+
+/* ══ SCROLL PROGRESS + ACTIVE NAV + BACK TO TOP ══ */
+const sections = ['about','skills','projects','cv','parcours','contact'];
 addEventListener('scroll',()=>{
   const n=document.getElementById('navbar');
-  n.style.padding=scrollY>60?'.65rem 3.5rem':'1.1rem 3.5rem';
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+  document.getElementById('scrollProgress').style.width = pct + '%';
+  n.style.padding=scrollTop>60?'.65rem 3.5rem':'1.1rem 3.5rem';
+
+  // back to top
+  const bt = document.getElementById('backTop');
+  if(scrollTop > 400){bt.classList.add('visible');}else{bt.classList.remove('visible');}
+
+  // active nav link
+  let current = '';
+  sections.forEach(id=>{
+    const sec = document.getElementById(id);
+    if(sec && sec.getBoundingClientRect().top <= 120) current = id;
+  });
+  document.querySelectorAll('.nav-links a').forEach(a=>{
+    a.classList.remove('active');
+    if(a.getAttribute('href') === '#'+current) a.classList.add('active');
+  });
 });
 
 /* ══ TERMINAL ══ */
@@ -1294,7 +1357,14 @@ document.querySelectorAll('.fbtn').forEach(btn=>{
     const f=btn.dataset.filter;
     document.querySelectorAll('.proj-card').forEach(c=>{
       const cats=c.dataset.cat||'';
-      c.style.display=(f==='all'||cats.includes(f))?'':'none';
+      const show = f==='all'||cats.includes(f);
+      if(show){
+        c.classList.remove('hidden');
+        c.style.display='';
+      } else {
+        c.classList.add('hidden');
+        setTimeout(()=>{ if(c.classList.contains('hidden')) c.style.display='none'; }, 350);
+      }
     });
   });
 });
