@@ -1362,7 +1362,7 @@ function toggleLang(){
   const ta = document.getElementById('message');
   if(ta) ta.placeholder = newLang === 'en' ? 'Hello Rinoh...' : 'Bonjour Rinoh...';
   const sub = document.getElementById('subject');
-  if(sub) sub.placeholder = newLang === 'en' ? 'Your subject...' : '...';
+  if(sub) sub.placeholder = newLang === 'en' ? 'Your subject...' : 'Votre sujet...';
   // Met à jour le html lang
   document.documentElement.lang = newLang;
   // Relance le terminal JSON dans la nouvelle langue
